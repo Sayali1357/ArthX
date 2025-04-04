@@ -66,12 +66,12 @@ const App = () => {
           />
           
           <Route
-            path="/virtual-pitch"
-            element={
-              <ProtectedRoute>
-                <VirtualPitch />
-              </ProtectedRoute>
-            }
+           path="/virtual-pitch"
+           element={
+             <ProtectedRoute>
+               <VirtualPitch />
+             </ProtectedRoute>
+           }
           />
           
           <Route

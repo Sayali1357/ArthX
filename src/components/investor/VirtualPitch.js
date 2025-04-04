@@ -158,8 +158,8 @@ const VirtualPitch = () => {
     // Start the ZegoCloud meeting
     const startMeeting = async () => {
         // Generate Kit Token
-        const appID = 1445273174; // From .env
-        const serverSecret = "c0a6503e0bfa49d5eac944cf2603ebf7"; // From .env
+        const appID = 1946188232; // From .env
+        const serverSecret = "5425887d26f51792bfe47741d74937f4"; // From .env
         const userID = randomID(5);
         const userName = "User_" + userID;
         

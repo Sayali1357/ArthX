@@ -77,7 +77,7 @@ const Navbar = () => {
         { path: '/dashboard', label: 'Dashboard' },
         { path: '/funding', label: 'Funding' },
         { path: '/meetings', label: 'Meetings' },
-        { path: '/virtual-pitch', label: 'Virtual Pitch' },
+        // { path: '/virtual-pitch', label: 'Virtual Pitch' },
         { path: '/loans', label: 'Loans' },
         { path: '/financial-tools', label: 'Financial Tools' },
         { path: '/tax-compliance', label: 'Tax & Compliance' },
