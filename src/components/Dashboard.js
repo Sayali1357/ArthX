@@ -34,7 +34,7 @@ const Dashboard = () => {
                 };
                 
                 console.log('Fetching current user data');
-                const response = await axios.get('http://localhost:5000/api/users/me', config);
+                const response = await axios.get('https://backend-arthankur.onrender.com', config);
                 console.log('User data response:', response.data);
                 setUserData(response.data);
             } catch (error) {

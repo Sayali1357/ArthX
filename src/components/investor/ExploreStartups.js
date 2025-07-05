@@ -365,7 +365,7 @@ const ExploreStartups = () => {
                                                     <span className="text-gray-700">{attachment.filename}</span>
                                                 </div>
                                                 <a 
-                                                    href={`http://localhost:5000/${attachment.path.replace('uploads/', '')}`} 
+                                                    href={`https://backend-arthankur.onrender.com/${attachment.path.replace('uploads/', '')}`} 
                                                     target="_blank" 
                                                     rel="noopener noreferrer"
                                                     className="flex items-center text-violet-600 hover:text-violet-800"

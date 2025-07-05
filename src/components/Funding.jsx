@@ -76,7 +76,7 @@ const Funding = () => {
 
       console.log('Making request to backend...'); // Debug log
 
-      const response = await fetch(editMode ? `http://localhost:5000/api/funding/${currentFundingId}` : 'http://localhost:5000/api/funding', {
+      const response = await fetch(editMode ? `https://backend-arthankur.onrender.com/${currentFundingId}` : 'http://localhost:5000/api/funding', {
         method: editMode ? 'PATCH' : 'POST',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -173,7 +173,7 @@ const Funding = () => {
   const fetchFundingRequests = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/funding', {
+      const response = await fetch('https://backend-arthankur.onrender.com/api/funding', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -199,7 +199,7 @@ const Funding = () => {
   const fetchDashboardStats = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5000/api/funding/stats', {
+      const response = await fetch('https://backend-arthankur.onrender.com/api/funding/stats', {
         headers: {
           'Authorization': `Bearer ${token}`
         }

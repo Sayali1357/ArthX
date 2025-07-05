@@ -157,7 +157,7 @@ const WorkingCapitalAnalysis = () => {
       // Add this debugging for the request
       const token = localStorage.getItem('token');
       console.log('Using auth token:', token ? 'Token exists' : 'No token found');
-      console.log('API URL:', `${process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/financial/working-capital/analysis`);
+      console.log('API URL:', `${process.env.REACT_APP_API_URL || 'https://backend-arthankur.onrender.com'}/api/financial/working-capital/analysis`);
       
       const savedData = await saveWorkingCapitalAnalysis(analysisData);
       console.log('Save response:', savedData);
