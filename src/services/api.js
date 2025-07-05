@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'https://backend-arthankur.onrender.com/api/users';
-const FINANCIAL_API_URL = 'hhttps://backend-arthankur.onrender.com/api/financial';
+const FINANCIAL_API_URL = 'https://backend-arthankur.onrender.com/api/financial';
 const FUNDING_API_URL = 'https://backend-arthankur.onrender.com/api/funding';
 const CHATBOT_API_URL = 'https://backend-arthankur.onrender.com/api/chatbot';
 const STRIPE_API_URL = 'https://backend-arthankur.onrender.com/api/stripe';
