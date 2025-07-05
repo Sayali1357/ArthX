@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import Landing from './components/Landing';
 import Login from './components/Login';
 import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
 import DashboardRouter from './components/DashboardRouter';
 import ProtectedRoute from './components/ProtectedRoute';
 import FinancialTools from './components/financial/FinancialTools';
@@ -16,13 +17,16 @@ import UserProfile from './components/UserProfile';
 import Meeting from './components/Meeting';
 import Notifications from './components/Notifications';
 import Chatbot from './components/Chatbot';
+import GovernmentSchemes from './components/GovernmentSchemes';
+import CaseStudies from './components/casestudies/CaseStudies';
 import './App.css';
 
 // These will be created later or already exist
-import VirtualPitch from './components/investor/VirtualPitch';
 import ExploreStartups from './components/investor/ExploreStartups';
 import PaymentGateway from './components/investor/PaymentGateway';
+import VirtualPitch from './components/investor/VirtualPitch';
 import Schemes from './components/startup/Schemes';
+import Payments from './components/startup/Payments';
 import Meetings from './components/Meetings';
 
 const App = () => {
@@ -45,6 +49,7 @@ const App = () => {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
           
           {/* Protected Routes for both user types */}
           <Route
@@ -63,15 +68,6 @@ const App = () => {
                 <Meetings />
               </ProtectedRoute>
             }
-          />
-          
-          <Route
-           path="/virtual-pitch"
-           element={
-             <ProtectedRoute>
-               <VirtualPitch />
-             </ProtectedRoute>
-           }
           />
           
           <Route
@@ -121,6 +117,15 @@ const App = () => {
           />
           
           <Route
+            path="/government-schemes"
+            element={
+              <ProtectedRoute allowedUserTypes={['startup']}>
+                <GovernmentSchemes />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
             path="/tax-compliance"
             element={
               <ProtectedRoute allowedUserTypes={['startup']}>
@@ -134,6 +139,15 @@ const App = () => {
             element={
               <ProtectedRoute allowedUserTypes={['startup']}>
                 <Funding />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/payments"
+            element={
+              <ProtectedRoute allowedUserTypes={['startup']}>
+                <Payments />
               </ProtectedRoute>
             }
           />
@@ -162,6 +176,24 @@ const App = () => {
             element={
               <ProtectedRoute>
                 <Meeting />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/virtual-pitch/:roomId"
+            element={
+              <ProtectedRoute>
+                <VirtualPitch />
+              </ProtectedRoute>
+            }
+          />
+          
+          <Route
+            path="/case-studies"
+            element={
+              <ProtectedRoute>
+                <CaseStudies />
               </ProtectedRoute>
             }
           />

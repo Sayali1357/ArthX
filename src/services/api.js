@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/users';
-const FINANCIAL_API_URL = 'http://localhost:5000/api/financial';
-const FUNDING_API_URL = 'http://localhost:5000/api/funding';
-const CHATBOT_API_URL = 'http://localhost:5000/api/chatbot';
-const STRIPE_API_URL = 'http://localhost:5000/api/stripe';
+const API_URL = 'https://backend-arthankur.onrender.com/api/users';
+const FINANCIAL_API_URL = 'hhttps://backend-arthankur.onrender.com/api/financial';
+const FUNDING_API_URL = 'https://backend-arthankur.onrender.com/api/funding';
+const CHATBOT_API_URL = 'https://backend-arthankur.onrender.com/api/chatbot';
+const STRIPE_API_URL = 'https://backend-arthankur.onrender.com/api/stripe';
+const VIRTUAL_PITCH_API_URL = 'https://backend-arthankur.onrender.com/api/virtual-pitch';
+const MEETINGS_API_URL = 'https://backend-arthankur.onrender.com/api/meetings';
 
 // Helper function to get auth token
 const getAuthHeader = () => {
@@ -198,8 +200,7 @@ export const checkChatbotStatus = async () => {
         const response = await axios.get(`${CHATBOT_API_URL}/status`);
         return response.data;
     } catch (error) {
-        console.error('Error checking chatbot status:', error);
-        throw { status: 'unavailable', mode: 'local', reason: 'error' };
+        throw error.response?.data || { error: 'Failed to check chatbot status' };
     }
 };
 
@@ -209,8 +210,21 @@ export const sendChatMessage = async (message) => {
         const response = await axios.post(`${CHATBOT_API_URL}/message`, { message });
         return response.data;
     } catch (error) {
-        console.error('Error sending chat message:', error);
-        throw error.response?.data || { error: 'Failed to send message to chatbot' };
+        throw error.response?.data || { error: 'Failed to send message' };
+    }
+};
+
+// Get personalized recommendations based on user data
+export const getPersonalizedRecommendations = async (message = '') => {
+    try {
+        const response = await axios.post(
+            `${CHATBOT_API_URL}/recommendations`, 
+            { message }, 
+            getAuthHeader()
+        );
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to get personalized recommendations' };
     }
 };
 
@@ -304,7 +318,6 @@ export const processPayment = async (paymentData) => {
         const response = await axios.post(`${STRIPE_API_URL}/process`, paymentData, getAuthHeader());
         return response.data;
     } catch (error) {
-        console.error('Error processing payment:', error);
         throw error.response?.data || { error: 'Failed to process payment' };
     }
 };
@@ -314,7 +327,74 @@ export const getPaymentHistory = async () => {
         const response = await axios.get(`${STRIPE_API_URL}/history`, getAuthHeader());
         return response.data;
     } catch (error) {
-        console.error('Error fetching payment history:', error);
         throw error.response?.data || { error: 'Failed to fetch payment history' };
+    }
+};
+
+// Virtual Pitch APIs
+export const getVirtualPitchForMeeting = async (meetingId) => {
+    try {
+        const response = await axios.get(`${MEETINGS_API_URL}/${meetingId}/virtual-pitch`, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to fetch virtual pitch information' };
+    }
+};
+
+// Get all meetings for the current user
+export const getMeetings = async () => {
+    try {
+        const response = await axios.get(MEETINGS_API_URL, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to fetch meetings' };
+    }
+};
+
+export const getOrCreateVirtualPitchByRoomId = async (roomId) => {
+    try {
+        const response = await axios.get(`${VIRTUAL_PITCH_API_URL}/room/${roomId}`, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to access virtual pitch room' };
+    }
+};
+
+export const getAllVirtualPitches = async (queryParams = {}) => {
+    try {
+        const { industry, search } = queryParams;
+        let url = VIRTUAL_PITCH_API_URL;
+        
+        // Add query parameters if provided
+        const params = new URLSearchParams();
+        if (industry) params.append('industry', industry);
+        if (search) params.append('search', search);
+        
+        if (params.toString()) {
+            url += `?${params.toString()}`;
+        }
+        
+        const response = await axios.get(url, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to fetch virtual pitches' };
+    }
+};
+
+export const getMyVirtualPitches = async () => {
+    try {
+        const response = await axios.get(`${VIRTUAL_PITCH_API_URL}/my-pitches`, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to fetch your virtual pitches' };
+    }
+};
+
+export const joinVirtualPitch = async (pitchId) => {
+    try {
+        const response = await axios.post(`${VIRTUAL_PITCH_API_URL}/${pitchId}/join`, {}, getAuthHeader());
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || { error: 'Failed to join virtual pitch' };
     }
 };

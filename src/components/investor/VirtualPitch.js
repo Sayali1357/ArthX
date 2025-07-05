@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../Navbar';
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
 
 // Function to get URL parameters
 export function getUrlParams(url = window.location.href) {
@@ -10,6 +11,8 @@ export function getUrlParams(url = window.location.href) {
 }
 
 const VirtualPitch = () => {
+    const { roomId } = useParams(); // Get roomId from route params
+    const navigate = useNavigate(); // Add navigate hook for redirection
     const [showVideoCall, setShowVideoCall] = useState(false);
     const [roomID, setRoomID] = useState('');
     const [meetingContainerRef, setMeetingContainerRef] = useState(null);
@@ -43,13 +46,19 @@ const VirtualPitch = () => {
         const userData = JSON.parse(localStorage.getItem('user') || '{}');
         setUserType(userData.userType || '');
         
-        // Check if URL has a roomID parameter
-        const params = getUrlParams();
-        const urlRoomID = params.get("roomID");
-        
-        if (urlRoomID) {
-            setRoomID(urlRoomID);
+        // First check if we have a roomId from route params
+        if (roomId) {
+            setRoomID(roomId);
             setShowVideoCall(true);
+        } else {
+            // Otherwise check URL parameters
+            const params = getUrlParams();
+            const urlRoomID = params.get("roomID");
+            
+            if (urlRoomID) {
+                setRoomID(urlRoomID);
+                setShowVideoCall(true);
+            }
         }
 
         // Fetch scheduled pitches
@@ -204,6 +213,11 @@ const VirtualPitch = () => {
             showNonVideoUser: true,
             showTextChat: true,
             showAudioVideoSettingsButton: true,
+            onLeaveRoom: () => {
+                console.log('User left the virtual pitch meeting');
+                // Redirect to dashboard after leaving the meeting
+                navigate('/dashboard');
+            }
         });
     };
 
