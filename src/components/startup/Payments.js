@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import StripeCheckout from 'react-stripe-checkout';
-import { processPayment, getPaymentHistory } from '../../services/api';
+import { createPaymentOrder, verifyPayment, getPaymentHistory } from '../../services/api';
 import Navbar from '../Navbar';
+
+const loadRazorpayScript = () => {
+    return new Promise((resolve) => {
+        const script = document.createElement('script');
+        script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        script.onload = () => resolve(true);
+        script.onerror = () => resolve(false);
+        document.body.appendChild(script);
+    });
+};
 
 const Payments = () => {
     const [amount, setAmount] = useState(100);
@@ -16,6 +25,7 @@ const Payments = () => {
     // Get user data from localStorage
     const userName = localStorage.getItem('userName') || 'Startup';
     const userId = localStorage.getItem('userId');
+    const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
 
     // Payment options
     const paymentOptions = [
@@ -57,61 +67,85 @@ const Payments = () => {
         setAmount(isNaN(value) ? 0 : value);
     };
 
-    // Process payment with Stripe
-    const handlePayment = async (token) => {
+    // Process payment with Razorpay
+    const handlePayment = async () => {
         setLoading(true);
         setError(null);
         
         try {
-            // Get auth token
             const authToken = localStorage.getItem('token');
             if (!authToken) {
                 throw new Error('Authentication required. Please log in again.');
             }
-            
-            // Validate amount before proceeding
             if (amount <= 0) {
                 throw new Error('Please enter a valid payment amount');
             }
+
+            const isLoaded = await loadRazorpayScript();
+            if (!isLoaded) {
+                throw new Error('Razorpay SDK failed to load. Are you online?');
+            }
             
-            // Make API call to backend
-            const response = await processPayment({
+            // Create Order
+            const orderRes = await createPaymentOrder({
                 amount: amount,
-                token: token,
                 purpose: paymentPurpose,
                 userId: userId
             });
-            
-            // Check if response contains success flag
-            if (response && response.success) {
-                setSuccess(true);
-                
-                // Show toast notification for successful payment
-                toast.success('Payment processed successfully!');
-                
-                // Refresh payment history
-                fetchPaymentHistory();
-                
-                // Reset success state after 3 seconds
-                setTimeout(() => {
-                    setSuccess(false);
-                }, 3000);
-            } else {
-                // Handle unexpected response format
-                throw new Error('Payment response was invalid. Please try again.');
+
+            if (!orderRes || !orderRes.success) {
+                throw new Error('Failed to create order');
             }
-            
+
+            const options = {
+                key: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_placeholder',
+                amount: orderRes.amount,
+                currency: orderRes.currency,
+                name: "Arthankur",
+                description: `Payment for ${paymentPurpose}`,
+                order_id: orderRes.orderId,
+                handler: async function (response) {
+                    try {
+                        const verifyRes = await verifyPayment({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            purpose: paymentPurpose,
+                            userId: userId,
+                            amount: amount
+                        });
+
+                        if (verifyRes && verifyRes.success) {
+                            setSuccess(true);
+                            toast.success('Payment processed successfully!');
+                            fetchPaymentHistory();
+                            setTimeout(() => { setSuccess(false); }, 3000);
+                        } else {
+                            toast.error('Payment verification failed');
+                        }
+                    } catch (err) {
+                        toast.error('Payment verification error');
+                    }
+                },
+                prefill: {
+                    name: userName,
+                    email: userEmail,
+                },
+                theme: {
+                    color: "#8b5cf6"
+                }
+            };
+
+            const paymentObject = new window.Razorpay(options);
+            paymentObject.open();
+
         } catch (error) {
             console.error('Payment error:', error);
             
-            // Handle different types of errors with specific messages
             let errorMessage = 'Payment processing failed';
-            
             if (error.message) {
-                // Custom error messages thrown above
                 errorMessage = error.message;
             } else if (error.response) {
-                // Server responded with an error
                 if (error.response.status === 401) {
                     errorMessage = 'Your session has expired. Please log in again.';
                 } else if (error.response.data && error.response.data.message) {
@@ -120,7 +154,6 @@ const Payments = () => {
                     errorMessage = `Server error: ${error.response.status}`;
                 }
             } else if (error.request) {
-                // Request was made but no response received
                 errorMessage = 'No response from payment server. Please check your internet connection and try again.';
             }
             
@@ -223,32 +256,22 @@ const Payments = () => {
                                 </div>
                                 
                                 <div className="flex justify-center">
-                                    <StripeCheckout
-                                        stripeKey="pk_test_51Off20H549Htd2C0L3Qx2vBjuAaDXolsMTwA3RHqbTd5tn4MqlKlb3f7ut6BfjLIWSs3T30RvHGIYsKjf52h81Yb00jCQEMgIh"
-                                        token={handlePayment}
-                                        name="Arthankur Payments"
-                                        description={`Payment for ${selectedOption.name}`}
-                                        amount={amount * 100} // Convert to paise/cents
-                                        currency="INR"
-                                        email={localStorage.getItem('userEmail')}
+                                    <button
+                                        onClick={handlePayment}
+                                        className={`w-full md:w-auto px-6 py-3 bg-violet-600 text-white font-medium rounded-md shadow-sm 
+                                            ${(loading || amount <= 0) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-violet-700'}`}
                                         disabled={loading || amount <= 0}
                                     >
-                                        <button
-                                            className={`w-full md:w-auto px-6 py-3 bg-violet-600 text-white font-medium rounded-md shadow-sm 
-                                                ${(loading || amount <= 0) ? 'opacity-50 cursor-not-allowed' : 'hover:bg-violet-700'}`}
-                                            disabled={loading || amount <= 0}
-                                        >
-                                            {loading ? (
-                                                <span className="flex items-center justify-center">
-                                                    <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                                    </svg>
-                                                    Processing...
-                                                </span>
-                                            ) : `Pay ₹${amount}`}
-                                        </button>
-                                    </StripeCheckout>
+                                        {loading ? (
+                                            <span className="flex items-center justify-center">
+                                                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 24 24">
+                                                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                                </svg>
+                                                Processing...
+                                            </span>
+                                        ) : `Pay ₹${amount} with Razorpay`}
+                                    </button>
                                 </div>
                             </div>
                         </>

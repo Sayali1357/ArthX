@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getUserData } from '../utils/auth';
 
-const API_URL = 'https://backend-arthankur.onrender.com/government-schemes';
+const API_URL = 'http://localhost:5000/government-schemes';
 
 // Get headers with auth token
 const getAuthHeaders = () => {

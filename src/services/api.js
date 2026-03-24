@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-const API_URL = 'https://backend-arthankur.onrender.com/api/users';
-const FINANCIAL_API_URL = 'https://backend-arthankur.onrender.com/api/financial';
-const FUNDING_API_URL = 'https://backend-arthankur.onrender.com/api/funding';
-const CHATBOT_API_URL = 'https://backend-arthankur.onrender.com/api/chatbot';
-const STRIPE_API_URL = 'https://backend-arthankur.onrender.com/api/stripe';
-const VIRTUAL_PITCH_API_URL = 'https://backend-arthankur.onrender.com/api/virtual-pitch';
-const MEETINGS_API_URL = 'https://backend-arthankur.onrender.com/api/meetings';
-const NOTIFICATIONS_API_URL = 'https://backend-arthankur.onrender.com/api/notifications';
+const API_URL = 'http://localhost:5000/api/users';
+const FINANCIAL_API_URL = 'http://localhost:5000/api/financial';
+const FUNDING_API_URL = 'http://localhost:5000/api/funding';
+const CHATBOT_API_URL = 'http://localhost:5000/api/chatbot';
+const PAYMENTS_API_URL = 'http://localhost:5000/api/payments';
+const VIRTUAL_PITCH_API_URL = 'http://localhost:5000/api/virtual-pitch';
+const MEETINGS_API_URL = 'http://localhost:5000/api/meetings';
+const NOTIFICATIONS_API_URL = 'http://localhost:5000/api/notifications';
 
 // Auth Header Helper
 const getAuthHeader = () => {
@@ -161,14 +161,19 @@ export const markNotificationAsRead = async (notificationId) => {
     return response.data;
 };
 
-// ================= Stripe Payments =================
-export const processPayment = async (paymentData) => {
-    const response = await axios.post(`${STRIPE_API_URL}/process`, paymentData, getAuthHeader());
+// ================= Payments =================
+export const createPaymentOrder = async (orderData) => {
+    const response = await axios.post(`${PAYMENTS_API_URL}/create-order`, orderData, getAuthHeader());
+    return response.data;
+};
+
+export const verifyPayment = async (paymentData) => {
+    const response = await axios.post(`${PAYMENTS_API_URL}/verify`, paymentData, getAuthHeader());
     return response.data;
 };
 
 export const getPaymentHistory = async () => {
-    const response = await axios.get(`${STRIPE_API_URL}/history`, getAuthHeader());
+    const response = await axios.get(`${PAYMENTS_API_URL}/history`, getAuthHeader());
     return response.data;
 };
 

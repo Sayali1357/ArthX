@@ -23,7 +23,7 @@ const Schemes = () => {
         const fetchSchemes = async () => {
             try {
                 console.log('Fetching government schemes from API');
-                const response = await axios.get('https://backend-arthankur.onrender.com/api/government-schemes');
+                const response = await axios.get('http://localhost:5000/api/government-schemes');
                 console.log('Schemes received:', response.data);
                 
                 // Transform backend data to match frontend format
@@ -96,7 +96,7 @@ const Schemes = () => {
                     }
                 };
                 
-                const response = await axios.get(`https://backend-arthankur.onrender.com/api/users/me`, config);
+                const response = await axios.get(`http://localhost:5000/api/users/me`, config);
                 console.log('User profile received:', response.data);
                 
                 // Log all fields that might be used for eligibility
@@ -119,7 +119,7 @@ const Schemes = () => {
                 try {
                     console.log(`Calling eligibility endpoint: /api/government-schemes/eligibility/${response.data._id}`);
                     const eligibilityResponse = await axios.get(
-                        `https://backend-arthankur.onrender.com/api/government-schemes/eligibility/${response.data._id}`,
+                        `http://localhost:5000/api/government-schemes/eligibility/${response.data._id}`,
                         config
                     );
                     console.log('Eligibility results from API:', eligibilityResponse.data);

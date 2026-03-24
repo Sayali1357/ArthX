@@ -81,7 +81,7 @@ const VirtualPitch = () => {
                 throw new Error('Authentication required');
             }
             
-            let url = 'https://backend-arthankur.onrender.com/api/virtual-pitch';
+            let url = 'http://localhost:5000/api/virtual-pitch';
             if (selectedIndustry) {
                 url += `?industry=${selectedIndustry}`;
             }
@@ -114,7 +114,7 @@ const VirtualPitch = () => {
                 throw new Error('Authentication required');
             }
             
-            const response = await axios.get('https://backend-arthankur.onrender.com/api/virtual-pitch/my-pitches', {
+            const response = await axios.get('http://localhost:5000/api/virtual-pitch/my-pitches', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -138,7 +138,7 @@ const VirtualPitch = () => {
             }
             
             const response = await axios.post(
-                `https://backend-arthankur.onrender.com/api/virtual-pitch/${pitchId}/join`,
+                `http://localhost:5000/api/virtual-pitch/${pitchId}/join`,
                 {},
                 {
                     headers: {
@@ -263,7 +263,7 @@ const VirtualPitch = () => {
             
             // Submit to API
             const response = await axios.post(
-                'https://backend-arthankur.onrender.com/api/virtual-pitch',
+                'http://localhost:5000/api/virtual-pitch',
                 {
                     title: pitchTitle,
                     description: pitchDescription,

@@ -35,7 +35,7 @@ const Community = () => {
         // Get user ID from token
         const fetchUserId = async () => {
             try {
-                const response = await axios.get('https://backend-arthankur.onrender.com/api/users/me', axiosConfig);
+                const response = await axios.get('http://localhost:5000/api/users/me', axiosConfig);
                 setUserId(response.data._id);
             } catch (error) {
                 console.error('Error fetching user ID:', error);
@@ -50,7 +50,7 @@ const Community = () => {
     const fetchPosts = async () => {
         try {
             const response = await axios.get(
-                `https://backend-arthankur.onrender.com/api/posts/all`,
+                `http://localhost:5000/api/posts/all`,
                 axiosConfig
             );
             setPosts(response.data);
@@ -62,7 +62,7 @@ const Community = () => {
     const fetchCommunities = async () => {
         try {
             const response = await axios.get(
-                `https://backend-arthankur.onrender.com/api/communities/all`,
+                `http://localhost:5000/api/communities/all`,
                 axiosConfig
             );
             setCommunities(response.data);
@@ -75,7 +75,7 @@ const Community = () => {
         e.preventDefault();
         try {
             await axios.post(
-                'https://backend-arthankur.onrender.com/api/posts',
+                'http://localhost:5000/api/posts',
                 {
                     title: newPost.title,
                     content: newPost.content
@@ -109,7 +109,7 @@ const Community = () => {
         e.preventDefault();
         try {
             await axios.post(
-                'https://backend-arthankur.onrender.com/api/communities',
+                'http://localhost:5000/api/communities',
                 newCommunity,
                 axiosConfig
             );
@@ -124,7 +124,7 @@ const Community = () => {
     const handleJoinCommunity = async (communityId) => {
         try {
             await axios.post(
-                `https://backend-arthankur.onrender.com/api/communities/${communityId}/join`,
+                `http://localhost:5000/api/communities/${communityId}/join`,
                 {},
                 axiosConfig
             );
@@ -137,7 +137,7 @@ const Community = () => {
     const handleLike = async (postId, isLike) => {
         try {
             await axios.post(
-                `https://backend-arthankur.onrender.com/api/posts/${postId}/${isLike ? 'like' : 'dislike'}`,
+                `http://localhost:5000/api/posts/${postId}/${isLike ? 'like' : 'dislike'}`,
                 {},
                 axiosConfig
             );
@@ -158,7 +158,7 @@ const Community = () => {
     const handleCommentSubmit = async (postId) => {
         try {
             const response = await axios.post(
-                `https://backend-arthankur.onrender.com/api/posts/${postId}/comments`,
+                `http://localhost:5000/api/posts/${postId}/comments`,
                 { content: newComment },
                 axiosConfig
             );

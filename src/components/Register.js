@@ -50,7 +50,7 @@ const Register = () => {
                 userType
             });
             
-            const response = await axios.post('https://backend-arthankur.onrender.com/api/users/register', {
+            const response = await axios.post('http://localhost:5000/api/users/register', {
                 ...formData,
                 userType
             });

@@ -53,7 +53,7 @@ const Meetings = () => {
 
     const fetchMeetings = async () => {
         try {
-            const response = await axios.get('https://backend-arthankur.onrender.com/api/meetings', axiosConfig);
+            const response = await axios.get('http://localhost:5000/api/meetings', axiosConfig);
             console.log('Fetched meetings:', response.data);
             setMeetings(response.data);
         } catch (error) {
@@ -64,7 +64,7 @@ const Meetings = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('https://backend-arthankur.onrender.com/api/meetings/users', axiosConfig);
+            const response = await axios.get('http://localhost:5000/api/meetings/users', axiosConfig);
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -83,7 +83,7 @@ const Meetings = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('https://backend-arthankur.onrender.com/api/meetings', newMeeting, axiosConfig);
+            await axios.post('http://localhost:5000/api/meetings', newMeeting, axiosConfig);
             setNewMeeting({
                 email: '',
                 title: '',
@@ -103,7 +103,7 @@ const Meetings = () => {
     const handleMeetingResponse = async (meetingId, status) => {
         try {
             await axios.patch(
-                `https://backend-arthankur.onrender.com/api/meetings/${meetingId}/status`,
+                `http://localhost:5000/api/meetings/${meetingId}/status`,
                 { status },
                 axiosConfig
             );
@@ -186,7 +186,7 @@ const Meetings = () => {
                 // Try to refresh the meeting to generate a new room ID
                 try {
                     const response = await axios.patch(
-                        `https://backend-arthankur.onrender.com/api/meetings/${meetingId}/refresh-virtual-pitch`,
+                        `http://localhost:5000/api/meetings/${meetingId}/refresh-virtual-pitch`,
                         {},
                         {
                             headers: {

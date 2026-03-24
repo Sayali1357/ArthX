@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://backend-arthankur.onrender.com/api';
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'http://localhost:5000/api';
 
 // Configure axios defaults
 const axiosInstance = axios.create({

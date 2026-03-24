@@ -105,7 +105,7 @@ const Loans = () => {
 
         console.log('Making request to backend...'); // Debug log
 
-        const response = await fetch('https://backend-arthankur.onrender.com/api/loans', {
+        const response = await fetch('http://localhost:5000/api/loans', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -155,7 +155,7 @@ const Loans = () => {
     try {
       setIsLoading(true);
       const token = localStorage.getItem('token');
-      const response = await fetch('https://backend-arthankur.onrender.com/api/loans', {
+      const response = await fetch('http://localhost:5000/api/loans', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -179,7 +179,7 @@ const Loans = () => {
   const fetchLoanStats = async () => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch('https://backend-arthankur.onrender.com/api/loans/stats', {
+        const response = await fetch('http://localhost:5000/api/loans/stats', {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
