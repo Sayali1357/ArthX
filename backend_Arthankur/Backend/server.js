@@ -40,29 +40,19 @@ app.use('/api/chatbot', chatbotRoutes);
 app.use('/api/payments', paymentRoutes);
 app.use('/api/government-schemes', governmentSchemesRoutes);
 
-// Create uploads directory if it doesn't exist
-const fs = require('fs');
-const uploadDir = 'uploads/funding';
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Create uploads directory for loans
-const loansUploadDir = 'uploads/loans';
-if (!fs.existsSync(loansUploadDir)) {
-    fs.mkdirSync(loansUploadDir, { recursive: true });
-}
-
-// Create uploads directory for tax documents
-const taxUploadDir = 'uploads/tax';
-if (!fs.existsSync(taxUploadDir)) {
-    fs.mkdirSync(taxUploadDir, { recursive: true });
-}
-
-// Create uploads directory for stripe documents
-const stripeUploadDir = 'uploads/stripe';
-if (!fs.existsSync(stripeUploadDir)) {
-    fs.mkdirSync(stripeUploadDir, { recursive: true });
+// Create uploads directories safely (only if not in Vercel production)
+if (process.env.NODE_ENV !== 'production') {
+    const fs = require('fs');
+    const dirs = ['uploads/funding', 'uploads/loans', 'uploads/tax', 'uploads/stripe'];
+    dirs.forEach(dir => {
+        try {
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+        } catch (err) {
+            console.error(`Folder creation error for ${dir}:`, err.message);
+        }
+    });
 }
 
 
