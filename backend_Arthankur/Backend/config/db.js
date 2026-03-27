@@ -18,8 +18,10 @@ const connectDB = async () => {
         console.log('Available collections:', collections.map(c => c.name));
         
     } catch (error) {
-        console.error(`Error: ${error.message}`);
-        process.exit(1);
+        console.error(`MongoDB connection error: ${error.message}`);
+        if (process.env.NODE_ENV !== "production") {
+            process.exit(1);
+        }
     }
 };
 
