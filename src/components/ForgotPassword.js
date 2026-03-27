@@ -14,7 +14,7 @@ const ForgotPassword = () => {
 
         try {
             // This is a placeholder - you will need to implement the actual API endpoint
-            // await axios.post('http://localhost:5000/api/users/forgot-password', { email });
+            // await axios.post((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/users/forgot-password', { email });
             
             // For now, just simulate success
             setTimeout(() => {

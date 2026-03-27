@@ -81,7 +81,7 @@ const VirtualPitch = () => {
                 throw new Error('Authentication required');
             }
             
-            let url = 'http://localhost:5000/api/virtual-pitch';
+            let url = (process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/virtual-pitch';
             if (selectedIndustry) {
                 url += `?industry=${selectedIndustry}`;
             }
@@ -114,7 +114,7 @@ const VirtualPitch = () => {
                 throw new Error('Authentication required');
             }
             
-            const response = await axios.get('http://localhost:5000/api/virtual-pitch/my-pitches', {
+            const response = await axios.get((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/virtual-pitch/my-pitches', {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -263,7 +263,7 @@ const VirtualPitch = () => {
             
             // Submit to API
             const response = await axios.post(
-                'http://localhost:5000/api/virtual-pitch',
+                (process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/virtual-pitch',
                 {
                     title: pitchTitle,
                     description: pitchDescription,

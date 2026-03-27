@@ -35,7 +35,7 @@ const Community = () => {
         // Get user ID from token
         const fetchUserId = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/users/me', axiosConfig);
+                const response = await axios.get((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/users/me', axiosConfig);
                 setUserId(response.data._id);
             } catch (error) {
                 console.error('Error fetching user ID:', error);
@@ -75,7 +75,7 @@ const Community = () => {
         e.preventDefault();
         try {
             await axios.post(
-                'http://localhost:5000/api/posts',
+                (process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/posts',
                 {
                     title: newPost.title,
                     content: newPost.content
@@ -109,7 +109,7 @@ const Community = () => {
         e.preventDefault();
         try {
             await axios.post(
-                'http://localhost:5000/api/communities',
+                (process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/communities',
                 newCommunity,
                 axiosConfig
             );

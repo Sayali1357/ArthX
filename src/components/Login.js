@@ -34,7 +34,7 @@ const Login = () => {
 
         try {
             console.log('Attempting login with:', formData);
-            const response = await axios.post('http://localhost:5000/api/users/login', formData);
+            const response = await axios.post((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/users/login', formData);
             console.log('Login response:', response.data);
             
             if (response.data.token) {

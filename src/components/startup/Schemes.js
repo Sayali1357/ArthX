@@ -23,7 +23,7 @@ const Schemes = () => {
         const fetchSchemes = async () => {
             try {
                 console.log('Fetching government schemes from API');
-                const response = await axios.get('http://localhost:5000/api/government-schemes');
+                const response = await axios.get((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/government-schemes');
                 console.log('Schemes received:', response.data);
                 
                 // Transform backend data to match frontend format

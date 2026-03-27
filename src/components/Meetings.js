@@ -53,7 +53,7 @@ const Meetings = () => {
 
     const fetchMeetings = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/meetings', axiosConfig);
+            const response = await axios.get((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/meetings', axiosConfig);
             console.log('Fetched meetings:', response.data);
             setMeetings(response.data);
         } catch (error) {
@@ -64,7 +64,7 @@ const Meetings = () => {
 
     const fetchUsers = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/meetings/users', axiosConfig);
+            const response = await axios.get((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/meetings/users', axiosConfig);
             setUsers(response.data);
         } catch (error) {
             console.error('Error fetching users:', error);
@@ -83,7 +83,7 @@ const Meetings = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:5000/api/meetings', newMeeting, axiosConfig);
+            await axios.post((process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '/meetings', newMeeting, axiosConfig);
             setNewMeeting({
                 email: '',
                 title: '',

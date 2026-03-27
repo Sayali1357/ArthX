@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/users';
-const FINANCIAL_API_URL = 'http://localhost:5000/api/financial';
-const FUNDING_API_URL = 'http://localhost:5000/api/funding';
-const CHATBOT_API_URL = 'http://localhost:5000/api/chatbot';
-const PAYMENTS_API_URL = 'http://localhost:5000/api/payments';
-const VIRTUAL_PITCH_API_URL = 'http://localhost:5000/api/virtual-pitch';
-const MEETINGS_API_URL = 'http://localhost:5000/api/meetings';
-const NOTIFICATIONS_API_URL = 'http://localhost:5000/api/notifications';
+export const BASE_URL = process.env.REACT_APP_API_URL || (process.env.REACT_APP_API_URL || 'http://localhost:5000/api') + '';
+
+const API_URL = `${BASE_URL}/users`;
+const FINANCIAL_API_URL = `${BASE_URL}/financial`;
+const FUNDING_API_URL = `${BASE_URL}/funding`;
+const CHATBOT_API_URL = `${BASE_URL}/chatbot`;
+const PAYMENTS_API_URL = `${BASE_URL}/payments`;
+const VIRTUAL_PITCH_API_URL = `${BASE_URL}/virtual-pitch`;
+const MEETINGS_API_URL = `${BASE_URL}/meetings`;
+const NOTIFICATIONS_API_URL = `${BASE_URL}/notifications`;
 
 // Auth Header Helper
 const getAuthHeader = () => {
