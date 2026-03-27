@@ -1,0 +1,6 @@
+Attempting to connect to MongoDB...
+MongoDB URI: mongodb+srv://snjadhav1704_db_user:AX9lYjLVWyE9SAOo@cluster0.n5zdb9m.mongodb.net/?appName=Cluster0
+(node:19564) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Server running on port 5000
+Error: bad auth : authentication failed
