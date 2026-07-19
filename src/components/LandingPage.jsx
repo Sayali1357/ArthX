@@ -210,7 +210,7 @@ const LandingPage = () => {
                     </div>
                     <div className="border-t border-gray-800 mt-12 pt-8">
                         <p className="text-gray-400 text-center">
-                            © 2024 Arthankur. All rights reserved.
+                            © 2024 Arthx. All rights reserved.
                         </p>
                     </div>
                 </div>

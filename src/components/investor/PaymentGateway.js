@@ -82,7 +82,7 @@ const PaymentGateway = () => {
                 key: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_placeholder',
                 amount: orderRes.amount,
                 currency: orderRes.currency,
-                name: "Arthankur Investor",
+                name: "Arthx Investor",
                 description: `Payment for ${paymentPurpose}`,
                 order_id: orderRes.orderId,
                 handler: async function (response) {
@@ -165,7 +165,7 @@ const PaymentGateway = () => {
                     ) : (
                         <>
                             <p className="text-gray-600 mb-8">
-                                Welcome, {userName}! Choose a payment option below to enhance your investment experience on Arthankur.
+                                Welcome, {userName}! Choose a payment option below to enhance your investment experience on Arthx.
                             </p>
                             
                             {error && (

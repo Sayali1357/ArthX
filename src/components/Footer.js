@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold">Arthankur</h3>
+            <h3 className="text-lg font-semibold">Arthx</h3>
             <p className="text-sm text-gray-300">
               Empowering startups and investors with innovative financial solutions.
             </p>
@@ -19,8 +19,8 @@ const Footer = () => {
               </a>
             </div>
             <div>
-              <a href="mailto:contact@arthankur.com" className="text-gray-300 hover:text-white">
-                contact@arthankur.com
+              <a href="mailto:contact@arthx.com" className="text-gray-300 hover:text-white">
+                contact@arthx.com
               </a>
             </div>
           </div>
@@ -64,7 +64,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-gray-700">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-sm text-gray-300">
-              © {new Date().getFullYear()} Arthankur. All rights reserved.
+              © {new Date().getFullYear()} Arthx. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
               <a

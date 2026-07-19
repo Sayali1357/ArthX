@@ -7,7 +7,7 @@ const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { 
-      text: "Hello! I'm Arthankur Assistant. How can I help you today?", 
+      text: "Hello! I'm Arthx Assistant. How can I help you today?", 
       sender: 'bot' 
     }
   ]);
@@ -52,17 +52,17 @@ const Chatbot = () => {
     const msg = message.toLowerCase();
     
     if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
-      return "Hello! How can I assist you with Arthankur today?";
+      return "Hello! How can I assist you with Arthx today?";
     } else if (msg.includes('funding') || msg.includes('investor')) {
-      return "Arthankur connects startups with potential investors. Startups can create funding requests, and investors can browse and express interest in these opportunities. Check out the 'Funding' section for startups or 'Explore Startups' for investors!";
+      return "Arthx connects startups with potential investors. Startups can create funding requests, and investors can browse and express interest in these opportunities. Check out the 'Funding' section for startups or 'Explore Startups' for investors!";
     } else if (msg.includes('loan') || msg.includes('loans')) {
       return "Startups can apply for loans through our platform. We connect you with various loan options tailored to your business needs. Visit the 'Loans' section to learn more and apply.";
     } else if (msg.includes('community')) {
       return "Our community feature allows startups and investors to connect, share ideas, and discuss opportunities. Check out the 'Community' section to join discussions.";
     } else if (msg.includes('meeting') || msg.includes('meet')) {
-      return "Arthankur facilitates meetings between startups and investors. Once an investor expresses interest in your funding request, you can schedule and conduct meetings through our platform.";
+      return "Arthx facilitates meetings between startups and investors. Once an investor expresses interest in your funding request, you can schedule and conduct meetings through our platform.";
     } else if (msg.includes('financial') || msg.includes('tools')) {
-      return "Arthankur offers financial tools to help startups with cash flow forecasting and working capital analysis. Explore these features in the 'Financial Tools' section.";
+      return "Arthx offers financial tools to help startups with cash flow forecasting and working capital analysis. Explore these features in the 'Financial Tools' section.";
     } else if (msg.includes('tax') || msg.includes('compliance')) {
       return "Our Tax Compliance tools help startups manage their tax obligations. You can upload GST returns and get tax-related insights. Check the 'Tax Compliance' section for more information.";
     } else if (msg.includes('recommendation') || msg.includes('suggest')) {
@@ -70,7 +70,7 @@ const Chatbot = () => {
     } else if (msg.includes('thank')) {
       return "You're welcome! Is there anything else I can help you with?";
     } else {
-      return "I'm not sure I understand. Could you try rephrasing your question? You can ask about funding, loans, community, meetings, or other features of the Arthankur platform.";
+      return "I'm not sure I understand. Could you try rephrasing your question? You can ask about funding, loans, community, meetings, or other features of the Arthx platform.";
     }
   };
 
@@ -193,7 +193,7 @@ const Chatbot = () => {
           <div className="bg-violet-600 text-white p-4 flex justify-between items-center">
             <div className="flex items-center">
               <MessageSquare className="h-5 w-5" />
-              <span className="ml-2 font-medium">Arthankur Assistant</span>
+              <span className="ml-2 font-medium">Arthx Assistant</span>
               {useLocalMode ? (
                 <span className="ml-2 text-xs bg-orange-500 text-white px-1.5 py-0.5 rounded">Local Mode</span>
               ) : (

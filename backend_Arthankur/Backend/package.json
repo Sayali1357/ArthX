@@ -1,7 +1,7 @@
 {
-  "name": "arthankur-backend",
+  "name": "arthx-backend",
   "version": "1.0.0",
-  "description": "Backend for Arthankur",
+  "description": "Backend for Arthx",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

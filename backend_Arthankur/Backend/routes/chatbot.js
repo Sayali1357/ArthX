@@ -12,9 +12,9 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 const geminiModel = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 // System prompt for the chatbot
-const systemPrompt = `You are a helpful assistant for Arthankur, a platform that connects startups with investors.
+const systemPrompt = `You are a helpful assistant for Arthx, a platform that connects startups with investors.
 Your role is to help users with questions about the platform.
-Here's some information about Arthankur:
+Here's some information about Arthx:
 - Startups can create funding requests and loan applications
 - Investors can browse and express interest in funding requests
 - There's a community section where users can connect and share ideas
@@ -41,7 +41,7 @@ Startup Profile Data:
 Your task is to analyze this data and provide specific recommendations for:
 1. Funding strategies appropriate for their stage and industry
 2. Financial tools they should prioritize using
-3. Resources or features on Arthankur that would benefit them most
+3. Resources or features on Arthx that would benefit them most
 4. Potential growth opportunities based on their industry
 5. Compliance requirements they should be aware of
 
@@ -84,8 +84,8 @@ router.post('/message', async (req, res) => {
     // Initialize chat with context
     const chat = geminiModel.startChat({
       history: [
-        { role: 'user', parts: [{ text: 'You are an assistant for Arthankur platform.' }] },
-        { role: 'model', parts: [{ text: 'I understand. I am now an assistant for Arthankur, a platform that connects startups with investors. How can I help you?' }] },
+        { role: 'user', parts: [{ text: 'You are an assistant for Arthx platform.' }] },
+        { role: 'model', parts: [{ text: 'I understand. I am now an assistant for Arthx, a platform that connects startups with investors. How can I help you?' }] },
       ],
       generationConfig: {
         maxOutputTokens: 150,
@@ -127,7 +127,7 @@ router.post('/recommendations', auth, async (req, res) => {
     // Initialize chat with personalized context
     const chat = geminiModel.startChat({
       history: [
-        { role: 'user', parts: [{ text: 'You are providing personalized recommendations for an Arthankur startup user.' }] },
+        { role: 'user', parts: [{ text: 'You are providing personalized recommendations for an Arthx startup user.' }] },
         { role: 'model', parts: [{ text: 'I understand. I will analyze their profile data and provide tailored recommendations for their startup.' }] },
       ],
       generationConfig: {

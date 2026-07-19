@@ -101,7 +101,7 @@ const Payments = () => {
                 key: process.env.REACT_APP_RAZORPAY_KEY_ID || 'rzp_test_placeholder',
                 amount: orderRes.amount,
                 currency: orderRes.currency,
-                name: "Arthankur",
+                name: "Arthx",
                 description: `Payment for ${paymentPurpose}`,
                 order_id: orderRes.orderId,
                 handler: async function (response) {
@@ -189,7 +189,7 @@ const Payments = () => {
                     ) : (
                         <>
                             <p className="text-gray-600 mb-8">
-                                Welcome, {userName}! Use this portal to make payments for various services offered on Arthankur.
+                                Welcome, {userName}! Use this portal to make payments for various services offered on Arthx.
                             </p>
                             
                             {error && (

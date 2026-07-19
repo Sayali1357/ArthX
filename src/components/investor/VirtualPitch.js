@@ -205,7 +205,7 @@ const VirtualPitch = () => {
             showLayoutButton: true,
             showPreJoinView: true,
             preJoinViewConfig: {
-                title: "Arthankur Virtual Pitch Meeting",
+                title: "Arthx Virtual Pitch Meeting",
             },
             branding: {
                 logoURL: "https://your-logo-url.com", // Replace with your logo URL

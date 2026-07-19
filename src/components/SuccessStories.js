@@ -10,7 +10,7 @@ const SuccessStories = () => {
       founderName: "Priya Sharma",
       fundingAmount: "₹2.5 Cr",
       investorName: "Nexus Ventures",
-      description: "AI-powered healthcare solutions startup that secured Series A funding within 6 months of joining Arthankur.",
+      description: "AI-powered healthcare solutions startup that secured Series A funding within 6 months of joining Arthx.",
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800",
       category: "Healthcare Tech",
       yearFunded: 2023,
@@ -158,7 +158,7 @@ const SuccessStories = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Success Stories</h2>
           <p className="text-lg text-gray-600">
-            Discover how startups and investors are achieving their goals with Arthankur
+            Discover how startups and investors are achieving their goals with Arthx
           </p>
           
           {/* Updated Success Metrics */}

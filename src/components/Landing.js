@@ -16,7 +16,7 @@ export default function Landing() {
                         <div className="mb-6">
                             <div className="flex items-center mb-2">
                                 <span className="text-4xl font-bold text-violet-600 mr-2">₹</span>
-                                <h1 className="text-4xl font-bold text-gray-900">Arthankur</h1>
+                                <h1 className="text-4xl font-bold text-gray-900">Arthx</h1>
                             </div>
                             <p className="text-2xl italic text-violet-700">Give wings to your startup or MSME</p>
                         </div>
@@ -26,7 +26,7 @@ export default function Landing() {
                             <span className="block text-violet-600">with Investors</span>
                         </h1>
                         <p className="text-xl text-gray-600 mb-8 max-w-lg">
-                            Arthankur is your one-stop platform for startup and MSME funding, financial tools, and investor connections.
+                            Arthx is your one-stop platform for startup and MSME funding, financial tools, and investor connections.
                         </p>
                         <div className="flex gap-4">
                             <Link
@@ -110,7 +110,7 @@ export default function Landing() {
                     <div className="text-center mb-16">
                         <h2 className="text-base text-violet-600 font-semibold tracking-wide uppercase mb-3">Process</h2>
                         <p className="text-4xl font-bold text-gray-900">
-                            How Arthankur Works
+                            How Arthx Works
                         </p>
                     </div>
 

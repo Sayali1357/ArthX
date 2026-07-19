@@ -83,7 +83,7 @@ const Navbar = () => {
                 <div className="flex justify-between h-16">
                     <div className="flex items-center">
                         <Link to="/dashboard" className="flex items-center">
-                            <span className="text-2xl font-bold text-violet-600">₹ Arthankur</span>
+                            <span className="text-2xl font-bold text-violet-600">₹ Arthx</span>
                             {/* <span className="ml-2 text-xs italic text-violet-500 hidden md:inline">Give wings to your startup</span> */}
                         </Link>
                     </div>

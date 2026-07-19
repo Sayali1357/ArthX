@@ -1,6 +1,6 @@
-﻿# Arthankur Backend
+# Arthx Backend
 
-Backend for Arthankur - A platform for startups to check eligibility for various government schemes.
+Backend for Arthx - A platform for startups to check eligibility for various government schemes.
 
 ## Features
 
